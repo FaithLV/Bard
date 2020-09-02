@@ -70,7 +70,7 @@ namespace Bard.Internal.When
 
         public IResponse Get(string route)
         {
-            var message = AsyncHelper.RunSync(() => _httpClient.GetAsync(route));
+            var message = AsyncHelper.RunSync(() => _httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Get, route)));
             var content = AsyncHelper.RunSync(() => message.Content.ReadAsStringAsync());
 
             var apiResult = new ApiResult(message, content);
